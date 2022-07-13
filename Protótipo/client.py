@@ -1,8 +1,12 @@
 import requests
+
+from app import get_entregas_pagamento
  
 api_url = 'http://127.0.0.1:8090/farmacias'
 api_ent_url = 'http://127.0.0.1:8090/entregadores'
 api_entregas_url = 'http://127.0.0.1:8090/entregas'
+api_auditoria_url = 'http://127.0.0.1:8090/auditoria'
+api_pag_url = 'http://127.0.0.1:8090/entregas/pagamento'
 
 #FARMACIAS
 def get_farmacias():
@@ -79,7 +83,8 @@ def get_entrega_by_id(id):
     print(response.json())
 
 def update_entrega(id):
-    entrega = {"id_cliente": 1, "id_entregador": 1, "nome" : "João Bosco", "entrega_status": "entregue", "rua": "Qualquer", "numero" :345, "bairro" : "Centro", "cidade" : "Pau dos Ferros"}
+    entrega = {"id_cliente": 1, "id_entregador": 1, "nome" : "João Bosco", "entrega_status": "em andamento", "rua": "Qualquer", "numero" :345, "bairro" : "Centro", "cidade" : "Pau dos Ferros"}
+    #{"id_cliente": 1, "id_entregador": 2, "nome" : "Maria Alves", "entrega_status": "em andamento", "rua": "Rua nova", "numero" :246, "bairro" : "Centro", "cidade" : "Pau dos Ferros"} 
     api_entregas_url = f"http://127.0.0.1:8090/entregas/{id}"
     response = requests.put(api_entregas_url, json=entrega)
     print(response.json())
@@ -88,6 +93,20 @@ def delete_entrega(id):
     api_entregas_url = f"http://127.0.0.1:8090/entregas/{id}"
     response = requests.delete(api_entregas_url)
     print(response)
+
+def get_entregas_auditoria():
+    response = requests.get(api_auditoria_url)
+    print(response.json())
+
+#PAGAMENTOS
+def get_entregas_pagamento():
+    response = requests.get(api_pag_url)
+    print(response.json())
+
+def insert_pagamento():
+    insert = {"id_entrega": 1, "forma_pagamento": "À vista", "valor_total" : 10}
+    response = requests.post(api_pag_url, json=insert)
+    print(response.json())
 
 #FARMÁCIAS
 #get_farmacias()
@@ -108,7 +127,12 @@ def delete_entrega(id):
 #ENTREGAS
 #get_entregas()
 #insert_entrega()
-get_entregas()
+#get_entregas()
 #get_entrega_by_id(1)
 #update_entrega(1)
 #delete_entrega(3)
+#get_entregas_auditoria()
+
+#PAGAMENTOS
+insert_pagamento()
+get_entregas_pagamento()

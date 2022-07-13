@@ -43,3 +43,45 @@ CREATE TABLE entregas (
   FOREIGN KEY (id_cliente) REFERENCES farmacias(id),
   FOREIGN KEY (id_entregador) REFERENCES entregadores(id_entregador)  
 );
+
+DROP TABLE IF EXISTS entregas_auditoria;
+CREATE TABLE entregas_auditoria (
+	id INTEGER PRIMARY KEY,
+  coluna_alterada TEXT,
+	old_status TEXT,
+	new_status TEXT,
+	user_action TEXT,
+	created_at TEXT
+);
+
+CREATE TRIGGER log_entregas_after_update 
+   AFTER UPDATE ON entregas
+   WHEN old.entrega_status <> new.entrega_status
+BEGIN
+	INSERT INTO entregas_auditoria (
+		coluna_alterada,
+		old_status,
+		new_status,
+		user_action,
+		created_at
+	)
+VALUES
+	(
+		'entrega_status',
+		old.entrega_status,
+		new.entrega_status,
+		'UPDATE',
+		DATETIME('NOW')
+	) ;
+END;
+
+DROP TABLE IF EXISTS pagamento;
+CREATE TABLE pagamento (
+  id_pagamento INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_entrega INTEGER,
+  forma_pagamento VARCHAR(50),
+  valor_total INTEGER,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (id_entrega) REFERENCES entregas(id)
+  );

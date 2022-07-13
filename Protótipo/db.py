@@ -45,6 +45,14 @@ def insert_entregas(args=()):
     get_db().commit()
     return cur.lastrowid
 
+def insert_pagamento(args=()):
+    sql = ''' INSERT INTO pagamento(id_entrega, forma_pagamento, valor_total)
+              VALUES(?,?,?) '''
+    cur = get_db().cursor()
+    cur.execute(sql, args)
+    get_db().commit()
+    return cur.lastrowid
+
 def query_db(query, args=(), one=False):
     cur = get_db().execute(query, args)
     rv = [dict((cur.description[i][0], value) \

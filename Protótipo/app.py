@@ -105,6 +105,31 @@ def delete_entregador(id):
     db.query_db(f'DELETE from entregadores WHERE id_entregador = {id}')
     return 'ok', 200 
 
+#AUDITORIA
+@app.route("/auditoria",methods=['GET'])
+def get_entregas_auditoria():
+    auditoria = db.query_db('select * from entregas_auditoria')
+    return jsonify(auditoria),200
+
+#PAGAMENTO
+@app.route("/entregas/pagamento",methods=['GET'])
+def get_entregas_pagamento():
+    pagamento = db.query_db('select * from pagamento')
+    return jsonify(pagamento),200
+
+@app.route("/entregas/pagamento",methods=['POST'])
+def add_pagamento():
+    if request.is_json:
+        pagamento = request.get_json()
+        id = db.insert_pagamento(
+            (
+            pagamento['id_entrega'],pagamento['forma_pagamento'],
+            pagamento['valor_total']            
+            )
+        )
+        return {"id":id}, 201
+    return {"error": "Request must be JSON"}, 415
+
 if __name__ == '__main__':
     init_db = False
     
