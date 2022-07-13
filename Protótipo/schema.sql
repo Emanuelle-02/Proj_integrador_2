@@ -1,0 +1,45 @@
+DROP TABLE IF EXISTS farmacias;
+
+CREATE TABLE farmacias (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome_farmacia VARCHAR(50) NOT NULL,
+  email VARCHAR(50),
+  cnpj VARCHAR(50) NOT NULL,
+  telefone VARCHAR(30),
+  rua VARCHAR(50),
+  numero INTEGER,
+  bairro VARCHAR(30),
+  cidade VARCHAR(30),
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS entregadores;
+
+CREATE TABLE entregadores (
+  id_entregador INTEGER PRIMARY KEY AUTOINCREMENT,
+  nome VARCHAR(50) NOT NULL,
+  cpf VARCHAR(30) UNIQUE NOT NULL,
+  email VARCHAR(50) UNIQUE NOT NULL,
+  telefone VARCHAR(30) UNIQUE NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+DROP TABLE IF EXISTS entregas;
+
+CREATE TABLE entregas (
+  id_entrega INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_cliente INTEGER,
+  id_entregador INTEGER,
+  nome VARCHAR(50) NOT NULL,
+  rua VARCHAR(50) NOT NULL,
+  numero INTEGER NOT NULL,
+  bairro VARCHAR(30) NOT NULL,
+  cidade VARCHAR(30) NOT NULL,
+  entrega_status VARCHAR(30),
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (id_cliente) REFERENCES farmacias(id),
+  FOREIGN KEY (id_entregador) REFERENCES entregadores(id_entregador)  
+);
