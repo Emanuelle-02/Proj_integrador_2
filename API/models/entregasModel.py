@@ -1,51 +1,34 @@
 from config import db
+from .entities import Entregas
 from flask import jsonify, request
-
-class Entregas(db.Model):
-  id_entrega = db.Column(db.Integer, primary_key=True)
-  id_cliente = db.Column(db.Integer, db.ForeignKey('farmacias.id'))
-  id_entregador = db.Column(db.Integer, db.ForeignKey('entregadores.id_entregador'))
-  entrega_status = db.Column(db.String(30), db.ForeignKey('solicitacoes.entrega_status'))
-  created_at  = db.Column(db.DateTime, server_default=db.func.now())
-  updated_at = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
-
-  def get_data(self):
-    return {
-      "id_entrega": self.id_entrega,
-      "id_cliente": self.id_cliente,
-      "id_entregador": self.id_entregador,
-      "entrega_status": self.entrega_status,
-      "created_at": self.created_at,
-      "updated_at": self.updated_at
-    }
 
 def get_todas_entregas():
   entregas = Entregas.query.all()
-  return jsonify([entrega.get_data() for entrega in entregas]), 200
+  return jsonify([entrega.to_json() for entrega in entregas]), 200
 
 def get_by_id(id):
   entregas = Entregas.query.get(id)
   if entregas is None:
     return "Not found", 404
-  return jsonify(entregas.get_data())
+  return jsonify(entregas.to_json())
 
 def get_entregas_farma(id_entrega, id_cliente):
   entregas = Entregas.query.filter_by(id_entrega = id_entrega, id_cliente = id_cliente).first()
   if entregas is None:
     return {"error": "Not found"}, 404
-  return jsonify(entregas.get_data())
+  return jsonify(entregas.to_json())
 
 def insert():
   if request.is_json:
-    body = request.get_data()
+    body = request.get_json()
     entregas = Entregas (
         id_cliente = body['id_cliente'],
+        id_entregador = body['id_entregador'],
         entrega_status = body['entrega_status'],
-
     )
     db.session.add(entregas)
     db.session.commit()
-    return "criado com sucesso", 201
+    return jsonify(entregas.to_json()), 201
   return {"error": "Request must be JSON"}, 415
 
 def update(id):
@@ -69,6 +52,6 @@ def delete(id):
   entrega = Entregas.query.get(id)
   if entrega is None:
       return "Not found", 404
-  db.session.add(entrega)
+  db.session.delete(entrega)
   db.session.commit()
   return "deletado com sucesso", 200

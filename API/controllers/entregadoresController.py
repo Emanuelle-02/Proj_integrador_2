@@ -6,8 +6,8 @@ def get_todos_entregadores():
 def get_by_id(id):
   return entregadoresModel.get_by_id(id)
 
-def input():
-  return entregadoresModel.input()
+def insert():
+  return entregadoresModel.insert()
 
 def update(id):
   return entregadoresModel.update(id)
