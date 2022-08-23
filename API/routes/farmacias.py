@@ -11,6 +11,10 @@ def get_farmacias():
 def get_farmacia_by_id(id):
   return farmaciasController.get_by_id(id)
 
+@app.route("/farmacias/email/<email>" , methods=["GET"])
+def get_entregador_by_email(email):
+  return farmaciasController.get_by_email(email)
+
 @app.route("/farmacias", methods=["POST"])
 def add_farmacia():
   return farmaciasController.insert()

@@ -11,8 +11,8 @@ def get_entregas():
 def get_entrega_by_id(id):
   return entregasController.get_by_id(id)
 
-@app.route("/entregas/<int:id>/farmacias", methods=["GET"])
-def get_entregas_farma(id_entrega, id_cliente):
+@app.route("/entregas/<int:id_entrega>/<int:id_cliente>", methods=["GET"])
+def get_entregas_farma(id_entrega=0, id_cliente=0):
   return entregasController.get_entregas_farma(id_entrega, id_cliente)
 
 @app.route("/entregas", methods=["POST"])
