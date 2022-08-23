@@ -11,6 +11,10 @@ def get_entregadores():
 def get_entregador_by_id(id):
   return entregadoresController.get_by_id(id)
 
+@app.route("/entregadores/email/<email>" , methods=["GET"])
+def get_entregador_by_email(email):
+  return entregadoresController.get_by_email(email)
+
 @app.route("/entregadores", methods=["POST"])
 def add_entregadores():
   return entregadoresController.insert()

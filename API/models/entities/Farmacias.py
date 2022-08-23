@@ -10,6 +10,8 @@ class Farmacias(db.Model):
   numero = db.Column(db.Integer)
   bairro = db.Column(db.String(50))
   cidade = db.Column(db.String(50))
+  active = db.Column(db.Boolean, default=True)
+  password = db.Column(db.String(50))
   created_at  = db.Column(db.DateTime, server_default=db.func.now())
   updated_at = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
@@ -24,6 +26,8 @@ class Farmacias(db.Model):
       "numero": self.numero,
       "bairro": self.bairro,
       "cidade": self.cidade,
+      "active": self.active,
+      "password": self.password,
       "created_at": self.created_at,
       "updated_at": self.updated_at
     }

@@ -12,6 +12,12 @@ def get_by_id(id):
     return "Error. Not found", 404
   return jsonify(farmacias.to_json())
 
+def get_by_email(email):
+  farmacias = Farmacias.query.filter_by(email=email).first()
+  if farmacias is None:
+    return "Error. Not found", 404
+  return jsonify(farmacias.to_json())
+
 def insert():
   if request.is_json:
     body = request.get_json()
@@ -23,7 +29,8 @@ def insert():
         rua = body["rua"],
         numero = body["numero"], 
         bairro = body["bairro"], 
-        cidade = body['cidade'] 
+        cidade = body['cidade'],
+        password = body['password'] 
     )
     db.session.add(farmacias)
     db.session.commit()
@@ -52,6 +59,10 @@ def update(id):
       farms.bairro = body["bairro"]
     if("cidade" in body):
       farms.cidade = body["cidade"]
+    if("active" in body):
+      farms.active = body["active"]
+    if("password" in body):
+      farms.active = body["password"]
     db.session.add(farms)
     db.session.commit()
     return "atualizado com sucesso", 200
@@ -61,6 +72,7 @@ def delete(id):
   farmacias = Farmacias.query.get(id)
   if farmacias is None:
       return "Error. Not found", 404
-  db.session.delete(farmacias)
+  farmacias.active = False
+  db.session.add(farmacias)
   db.session.commit()
   return "deletado com sucesso", 200

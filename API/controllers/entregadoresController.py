@@ -6,6 +6,9 @@ def get_todos_entregadores():
 def get_by_id(id):
   return entregadoresModel.get_by_id(id)
 
+def get_by_email(email):
+  return entregadoresModel.get_by_email(email)
+
 def insert():
   return entregadoresModel.insert()
 

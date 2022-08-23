@@ -12,6 +12,12 @@ def get_by_id(id):
     return "Error. Not found", 404
   return jsonify(entregadores.to_json())
 
+def get_by_email(email):
+  entregadores = Entregadores.query.filter_by(email=email).first()
+  if entregadores is None:
+    return "Error. Not found", 404
+  return jsonify(entregadores.to_json())
+
 def insert():
   if request.is_json:
     body = request.get_json()
@@ -19,7 +25,8 @@ def insert():
         nome = body["nome"],
         cpf = body["cpf"],
         email = body["email"], 
-        telefone = body["telefone"] 
+        telefone = body["telefone"], 
+        senha = body["senha"] 
     )
     db.session.add(entregadores)
     db.session.commit()
@@ -40,6 +47,10 @@ def update(id):
       entregs.email = body["email"]
     if("telefone" in body):
       entregs.telefone = body["telefone"]
+    if("active" in body):
+      entregs.active = body["active"]
+    if("senha" in body):
+      entregs.senha = body["senha"]
     db.session.add(entregs)
     db.session.commit()
     return "atualizado com sucesso", 200
@@ -49,6 +60,7 @@ def delete(id):
   entregs = Entregadores.query.get(id)
   if entregs is None:
       return "Error. Not found", 404
-  db.session.delete(entregs)
+  entregs.active = False
+  db.session.add(entregs)
   db.session.commit()
   return "deletado com sucesso", 200

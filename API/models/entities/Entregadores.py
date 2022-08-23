@@ -6,6 +6,8 @@ class Entregadores(db.Model):
   cpf = db.Column(db.String(30), unique=True)
   email = db.Column(db.String(50), unique=True)
   telefone = db.Column(db.String(50), unique=True)
+  active = db.Column(db.Boolean, default=True)
+  senha = db.Column(db.String(50))
   created_at  = db.Column(db.DateTime, server_default=db.func.now())
   updated_at = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
@@ -16,6 +18,8 @@ class Entregadores(db.Model):
       "cpf": self.cpf,
       "email": self.email,
       "telefone": self.telefone,
+      "active": self.active,
+      "senha": self.senha,
       "created_at": self.created_at,
       "updated_at": self.updated_at
     }
