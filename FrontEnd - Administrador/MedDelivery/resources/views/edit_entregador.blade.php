@@ -10,25 +10,25 @@
             <div class="card">
                 <div class="card-body">
                 @csrf
-                    <form action="{{ route('editar_entregadores', ['id' => $responseArray['id_entregador']]) }}" method="get">
+                    <form action="{{ route('editar_entregadores', ['id' => $response2['id_entregador']]) }}" method="get">
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label for="nome">Nome:</label>
-                                    <input type="text" name="nome" value="{{$responseArray['nome']}}" class="form-control">
+                                    <input type="text" name="nome" value="{{$response2['nome']}}" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="cpf">Cpf:</label>
-                                    <input type="text" name="cpf" value="{{$responseArray['cpf']}}" class="form-control">
+                                    <input type="text" name="cpf" value="{{$response2['cpf']}}" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email:</label>
-                                    <input type="text" name="email" value="{{$responseArray['email']}}" class="form-control">
+                                    <input type="text" name="email" value="{{$response2['email']}}" class="form-control">
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="telefone">Telefone:</label>
-                                    <input type="text" name="telefone" value="{{$responseArray['telefone']}}" class="form-control">
+                                    <input type="text" name="telefone" value="{{$response2['telefone']}}" class="form-control">
                                 </div>
                             </div>
                         </div>

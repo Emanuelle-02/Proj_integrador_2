@@ -13,19 +13,19 @@
                 <div class="row">        
                     <div class="form-group">
                         <label for="rua">Rua:</label>
-                        <p>{{$responseArray['rua']}}</p>
+                        <p>{{$response2['rua']}}</p>
                     </div>
                     <div class="form-group">
                         <label for="numero">Número:</label>
-                        <p>{{$responseArray['numero']}}</p>
+                        <p>{{$response2['numero']}}</p>
                     </div>
                     <div class="form-group">
                         <label for="bairro">Bairro:</label>
-                        <p>{{$responseArray['bairro']}}</p>
+                        <p>{{$response2['bairro']}}</p>
                     </div>
                     <div class="form-group">
                         <label for="cidade">Cidade:</label>
-                        <p>{{$responseArray['cidade']}}</p>
+                        <p>{{$response2['cidade']}}</p>
                     </div>
                 </div>
                 <br>
