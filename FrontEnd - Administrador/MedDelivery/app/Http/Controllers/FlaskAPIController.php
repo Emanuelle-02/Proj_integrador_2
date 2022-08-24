@@ -8,8 +8,8 @@ class FlaskAPIController extends Controller
 {
     public function all_farmacias(){
         $response = Http::get('http://127.0.0.1:8090/farmacias');
-        $responseArray = $response->json();
-        return view('home', compact('responseArray'));
+        $response2 = $response->json();
+        return view('home', compact('response2'));
     }
 
     public function add_farmacias(Request $request){
@@ -31,15 +31,15 @@ class FlaskAPIController extends Controller
     public function detalhesfarmacia($id){
         $id2 = intval($id);
         $response = Http::get('http://127.0.0.1:8090/farmacias/'. $id2);
-        $responseArray = $response->json();
-        return view('/detalhes', compact('responseArray'));
+        $response2 = $response->json();
+        return view('/detalhes', compact('response2'));
     }
 
     public function editarfarmacia($id){
         $id2 = intval($id);
         $response = Http::get('http://127.0.0.1:8090/farmacias/'. $id2);
-        $responseArray = $response->json();
-        return view('/editar_farmacia', compact('responseArray'));
+        $response2 = $response->json();
+        return view('/editar_farmacia', compact('response2'));
     }
 
     public function editarfarmacia2($id, Request $request){
@@ -69,8 +69,8 @@ class FlaskAPIController extends Controller
 //ENTREGADORES
     public function all_entregadores(){
         $response = Http::get('http://127.0.0.1:8090/entregadores');
-        $responseArray = $response->json();
-        return view('entregadores', compact('responseArray'));
+        $response2 = $response->json();
+        return view('entregadores', compact('response2'));
     }
 
     public function add_entregadores(Request $request){
@@ -89,8 +89,8 @@ class FlaskAPIController extends Controller
     public function editentregadores($id){
         $id2 = intval($id);
         $response = Http::get('http://127.0.0.1:8090/entregadores/'. $id2);
-        $responseArray = $response->json();
-        return view('/edit_entregador', compact('responseArray'));
+        $response2 = $response->json();
+        return view('/edit_entregador', compact('response2'));
     }
     
     public function editentregadores2($id, Request $request){
@@ -111,5 +111,18 @@ class FlaskAPIController extends Controller
         'active' => False
         ]);
         return redirect('/entregadores');
+    }
+
+    //Exibe entregas
+    public function exibe_entregas(){
+        $response = Http::get('http://127.0.0.1:8090/entregas');
+        $response2 = $response->json();
+        return view('entregas', compact('response2'));
+    }
+
+    public function exibe_auditoria(){
+        $response = Http::get('http://127.0.0.1:8090/auditoria');
+        $response2 = $response->json();
+        return view('auditoria', compact('response2'));
     }
 }

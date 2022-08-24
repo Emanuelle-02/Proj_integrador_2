@@ -6,7 +6,7 @@
     <div class="card mt-4">
         <div class="card-header">
             <h4>Gerenciar Entregadores</h4>
-            <a href="#" class="btn btn-dark btn-sm float-end">
+            <a href="add_entregador" class="btn btn-dark btn-sm float-end">
             <i class="fa-solid fa-motorcycle"></i>    
                 Adicionar Entregador 
             </a>
@@ -25,7 +25,7 @@
                 </thead>
             
                 <tbody>
-                    @foreach($responseArray as $entregador)
+                    @foreach($response2 as $entregador)
                     @if($entregador['active'])
                     <tr>
                         <td>{{ $entregador['id_entregador'] }}</td>

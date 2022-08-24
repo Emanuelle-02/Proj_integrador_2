@@ -31,7 +31,7 @@
                 </thead>
             
                 <tbody>
-                    @foreach($responseArray as $farmacia)
+                    @foreach($response2 as $farmacia)
                     @if($farmacia['active'])
                     <tr>
                         <td>{{ $farmacia['id'] }}</td>

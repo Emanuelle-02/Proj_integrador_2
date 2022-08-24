@@ -48,6 +48,13 @@ Route::get('/edit_entregador', function () {
     return view('edit_entregador');
 });
 
+Route::get('/entregas', function () {
+    return view('entregas');
+});
+
+Route::get('/auditoria', function () {
+    return view('auditoria');
+});
 
 Auth::routes();
 
@@ -70,3 +77,9 @@ Route::get('/add_entregadores', [FlaskAPIController::class, 'add_entregadores'])
 Route::get('/editentregadores/{id}', [FlaskAPIController::class, 'editentregadores'])->name('edit_entregadores');
 Route::get('/editentregadores2/{id}', [FlaskAPIController::class, 'editentregadores2'])->name('editar_entregadores');
 Route::get('/removeentregadores/{id}', [FlaskAPIController::class, 'removeentregadores'])->name('delete_entregador');
+
+
+//ENTREGAS
+Route::get('/entregas', [FlaskAPIController::class, 'exibe_entregas']);
+//AUDITORIA
+Route::get('/auditoria', [FlaskAPIController::class, 'exibe_auditoria']);
