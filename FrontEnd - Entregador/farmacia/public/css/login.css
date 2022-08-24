@@ -1,0 +1,61 @@
+@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
+body{
+    font-family: sans-serif;
+    background-image: url("../img/dev-farmacia.png") ;
+    background-size: cover;
+}
+ 
+.login{
+    width:280px;
+    position:absolute;
+    top:30%;
+    left:30%;
+    transform: translate(-30%,-30%);
+    color: rgb(39, 5, 5);
+}
+
+.login h1{
+    float:left;
+    font-size:42px;
+    border-bottom:6px solidhsl(160, 3%, 21%);
+    margin-bottom:50px;
+    padding:13px 0;
+}
+
+.textbox{
+    width:100%;
+    overflow:hidden;
+    font-size:20px;
+    padding:10px 0;
+    margin:10px 0;
+    border-bottom:1px solid#353836;
+}
+
+.textboxi{
+    width: 30px;
+    float: left;
+    text-align: center;
+}
+
+.textbox input{
+    color: black;
+    font-size: 18px;
+    width: 230px;
+    margin: 10px;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.btn{
+    width: 100%;
+    font-size: 20px;
+    color: white;
+    background: black;
+    border: 2px solid#1a1b1b;
+    padding: 8px;
+    margin: 15px 0px 0px 0px;
+}
+.btn:hover{
+    background-color: #6a6d6d67;
+}
