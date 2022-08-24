@@ -4,7 +4,7 @@
 <div class="container-fluid px-4">
     <div class="card mt-4">
         <div class="card-header">
-            <h4>Gerenciar Farmácias</h4>
+            <h4>Adicionar Farmácias</h4>
         </div>
         <div class="card-body" style="overflow-x:auto;">
             <div class="card">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <br>
-                        <button class="btn btn-dark"><i class="fa-solid fa-hand-holding-medical"></i> Salvar</button>
+                        <button class="btn btn-dark"><i class="fa-solid fa-hand-holding-medical"></i> Adicionar</button>
                     </form>
                 </div>
             </div>
