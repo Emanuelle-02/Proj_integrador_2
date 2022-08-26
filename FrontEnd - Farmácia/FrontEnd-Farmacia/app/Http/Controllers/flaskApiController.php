@@ -11,9 +11,12 @@ class flaskApiController extends Controller
 {    
      //Login
      public function fazerLogin(Request $request){
+        $header = [
+            'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTY2MTQzODc3M30.0PB047n_S3IS_qFpUdBl1FMWbzDwmEbr7XSNqNzQWA0'
+        ];
         $email = $request->input('email');
         $password = $request->input('password');
-        $response = Http::get('http://127.0.0.1:8090/farmacias/email/'. $email);
+        $response = Http::withHeaders($header)->get('http://127.0.0.1:8090/farmacias/email/'. $email);
         $log = $response->json();
         if($log == null){
             dd(1);
@@ -35,22 +38,35 @@ class flaskApiController extends Controller
 
     //Entregas solicitadas
     public function listaEntregas(){
+        $header = [
+            'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTY2MTQzODc3M30.0PB047n_S3IS_qFpUdBl1FMWbzDwmEbr7XSNqNzQWA0'
+        ];
         $id_log = intval(getCookie_log());
-        $response = Http::get('http://127.0.0.1:8090/entregas');
+        $response = Http::withHeaders($header)->get('http://127.0.0.1:8090/entregas');
         $response2 = $response->json();
         return view('home', compact('response2','id_log'));
     }
 
     public function detalhesentrega($id){
+        $header = [
+            'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTY2MTQzODc3M30.0PB047n_S3IS_qFpUdBl1FMWbzDwmEbr7XSNqNzQWA0'
+        ];
         $id2 = intval($id);
-        $response = Http::get('http://127.0.0.1:8090/entregas/'. $id2);
+        $response = Http::withHeaders($header)->get('http://127.0.0.1:8090/entregas/'. $id2);
         $response2 = $response->json();
         return view('/detalhes', compact('response2'));
     }
 
     public function add_entrega(Request $request){
-        $response = Http::post('http://127.0.0.1:8090/entregas',[
-        'id_cliente' => 1, //Passa o id do usuário logado exemplificado
+        $header = [
+            'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTY2MTQzODc3M30.0PB047n_S3IS_qFpUdBl1FMWbzDwmEbr7XSNqNzQWA0'
+        ]; 
+        //Pega o Id do usuário logado.
+        $id_log = intval(getCookie_log()); 
+        $response = Http::withHeaders($header)->post('http://127.0.0.1:8090/entregas',[
+        'id_cliente' => $id_log, //Passa o id do usuário logado exemplificado caso a empresa disponibilize o frontend para o cliente como um serviço extra. 
+        //Sendo backend próprio, a farmácia em questão passa o próprio id como exemplificado abaixo:
+        //'id_cliente' => 1,
         'medicamento' => $request->input('medicamento'),
         'nome' => $request->input('nome'),
         'rua' => $request->input('rua'),
@@ -62,15 +78,21 @@ class flaskApiController extends Controller
     }
 
     public function editar($id){
+        $header = [
+            'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTY2MTQzODc3M30.0PB047n_S3IS_qFpUdBl1FMWbzDwmEbr7XSNqNzQWA0'
+        ];
         $id2 = intval($id);
-        $response = Http::get('http://127.0.0.1:8090/entregas/'. $id2);
+        $response = Http::withHeaders($header)->get('http://127.0.0.1:8090/entregas/'. $id2);
         $response2 = $response->json();
         return view('/editarEntrega', compact('response2'));
     }
 
     public function editar2($id, Request $request){
+        $header = [
+            'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTY2MTQzODc3M30.0PB047n_S3IS_qFpUdBl1FMWbzDwmEbr7XSNqNzQWA0'
+        ];
         $id2 = intval($id);
-        $response = Http::put('http://127.0.0.1:8090/entregas/'. $id2,[
+        $response = Http::withHeaders($header)->put('http://127.0.0.1:8090/entregas/'. $id2,[
         'medicamento' => $request->input('medicamento'),
         'nome' => $request->input('nome'),
         'rua' => $request->input('rua'),
@@ -82,8 +104,31 @@ class flaskApiController extends Controller
     }
 
     public function removeentrega($id){
+        $header = [
+            'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTY2MTQzODc3M30.0PB047n_S3IS_qFpUdBl1FMWbzDwmEbr7XSNqNzQWA0'
+        ];
         $id2 = intval($id);
-        $response = Http::delete('http://127.0.0.1:8090/entregas/'. $id2);
+        $response = Http::withHeaders($header)->delete('http://127.0.0.1:8090/entregas/'. $id2);
         return redirect('/home');
+    }
+
+     public function listaAndamentos(){
+        $header = [
+            'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTY2MTQzODc3M30.0PB047n_S3IS_qFpUdBl1FMWbzDwmEbr7XSNqNzQWA0'
+        ];
+        $id_log = intval(getCookie_log());
+        $response = Http::withHeaders($header)->get('http://127.0.0.1:8090/entregas');
+        $response2 = $response->json();
+        return view('andamento', compact('response2','id_log'));
+    }
+
+    public function listaEntregues(){
+        $header = [
+            'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTY2MTQzODc3M30.0PB047n_S3IS_qFpUdBl1FMWbzDwmEbr7XSNqNzQWA0'
+        ];
+        $id_log = intval(getCookie_log());
+        $response = Http::withHeaders($header)->get('http://127.0.0.1:8090/entregas');
+        $response2 = $response->json();
+        return view('entregues', compact('response2','id_log'));
     }
 }

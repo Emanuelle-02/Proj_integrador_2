@@ -32,6 +32,13 @@ Route::get('/solicitarEntrega', function () {
     return view('solicitarEntrega');
 });
 
+Route::get('/andamento', function () {
+    return view('andamento');
+});
+
+Route::get('/entregues', function () {
+    return view('entregues');
+});
 
 Route::get('/fazerLogin', [flaskApiController::class, 'fazerLogin']);
 Route::get('/home', [flaskApiController::class, 'listaEntregas']);
@@ -40,3 +47,5 @@ Route::get('/add_entrega', [flaskAPIController::class, 'add_entrega']);
 Route::get('/editar/{id}', [flaskAPIController::class, 'editar'])->name('edit_entregas');
 Route::get('/editar2/{id}', [flaskAPIController::class, 'editar2'])->name('editar_entregas');
 Route::get('/removeentrega/{id}', [flaskAPIController::class, 'removeentrega'])->name('delete_entrega');
+Route::get('/andamento', [flaskApiController::class, 'listaAndamentos']);
+Route::get('/entregues', [flaskApiController::class, 'listaEntregues']);
