@@ -23,17 +23,21 @@
                         <th>Status</th>
                         <th>Cidade</th>
                         <th>Ações</th>
+                        <th>Data</th>
+                        <th>Valor</th>
                     </tr>
                 </thead>
             
                 <tbody>
                     @foreach($response2 as $entrega)
-                    @if($entrega['active'])
+                    @if($entrega['active'] && $entrega['entrega_status'] == 'Pendente')
                     <tr>
                         <td>{{ $entrega['id_entrega'] }}</td>
                         <td>{{ $entrega['id_cliente'] }}</td>
                         <td>{{ $entrega['entrega_status'] }}</td>
                         <td>{{ $entrega['cidade'] }}</td>
+                        <td>{{ $entrega['created_at'] }}</td> 
+                        <td>R$ {{ $entrega['preco'] }},00</td> 
 
                         <td>
                             <form class="formulario" action="{{ route('details', ['id' => $entrega['id_entrega']]) }}" method="get"> 

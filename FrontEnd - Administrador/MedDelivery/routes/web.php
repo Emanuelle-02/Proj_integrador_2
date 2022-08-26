@@ -56,6 +56,14 @@ Route::get('/auditoria', function () {
     return view('auditoria');
 });
 
+Route::get('/em_andamento', function () {
+    return view('em_andamento');
+});
+
+Route::get('/pendentes', function () {
+    return view('pendentes');
+});
+
 Auth::routes();
 
 
@@ -81,5 +89,7 @@ Route::get('/removeentregadores/{id}', [FlaskAPIController::class, 'removeentreg
 
 //ENTREGAS
 Route::get('/entregas', [FlaskAPIController::class, 'exibe_entregas']);
+Route::get('/em_andamento', [FlaskAPIController::class, 'exibe_andamento']);
+Route::get('/pendentes', [FlaskAPIController::class, 'exibe_pendente']);
 //AUDITORIA
 Route::get('/auditoria', [FlaskAPIController::class, 'exibe_auditoria']);

@@ -4,7 +4,7 @@
 <div class="container-fluid px-4">
     <div class="card mt-4">
         <div class="card-header">
-            <h4>Adicionar Farmácias</h4>
+            <h4>Adicionar Farmácia</h4>
         </div>
         <div class="card-body" style="overflow-x:auto;">
             <div class="card">

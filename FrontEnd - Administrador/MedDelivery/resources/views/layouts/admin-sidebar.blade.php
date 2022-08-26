@@ -6,7 +6,7 @@
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages" style = "color: black">
                                 <div class="sb-nav-link-icon" style = "color: black"><i class="fas fa-user-plus"></i></div>
-                                Cadastro de usuários 
+                                Cadastro de usuários
                                 <div class="sb-sidenav-collapse-arrow" style = "color: black"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
@@ -19,6 +19,26 @@
                                     </a>
                                 </nav>
                             </div>
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePage" aria-expanded="false" aria-controls="collapsePage" style = "color: black">
+                                <div class="sb-nav-link-icon" style = "color: black"><i class="fas fa-table"></i></div>
+                                Entregas
+                                <div class="sb-sidenav-collapse-arrow" style = "color: black"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePage" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link" href="/pendentes" style = "color: black">
+                                        Pendentes
+                                    </a>
+                                    <a class="nav-link" href="/em_andamento" style = "color: black">
+                                        Em andamento
+                                    </a>
+                                    <a class="nav-link" href="/entregas" style = "color: black">
+                                        Entregues
+                                    </a>
+                                </nav>
+                            </div>
+
                             <div class="sb-sidenav-menu-heading">Gerenciar</div>
                             <a class="nav-link" href="/home" style = "color: black">
                                 <div class="sb-nav-link-icon" style = "color: black"><i class="fa-solid fa-hand-holding-medical"></i> </div>
@@ -28,10 +48,7 @@
                                 <div class="sb-nav-link-icon" style = "color: black"><i class="fa-solid fa-motorcycle"></i></div>
                                 Entregadores
                             </a>
-                            <a class="nav-link" href="/entregas" style = "color: black">
-                                <div class="sb-nav-link-icon" style = "color: black"><i class="fas fa-table"></i></div>
-                                Entregas realizadas
-                            </a>
+                            
                             <a class="nav-link" href="/auditoria" style = "color: black">
                                 <div class="sb-nav-link-icon" style = "color: black"><i class="fas fa-table"></i></div>
                                 Auditoria

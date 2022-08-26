@@ -5,7 +5,7 @@
 <div class="container-fluid px-4">
     <div class="card mt-4">
         <div class="card-header">
-            <h4>Minhas Entregas</h4>
+            <h4>Entregas finalizadas</h4>
         </div>
         <div class="card-body" style="overflow-x:auto;">
             <table class="table table-bordered">
@@ -23,19 +23,16 @@
             
                 <tbody>
                     @foreach($response2 as $entrega)
-                    @if($entrega['entrega_status'] == 'Em andamento' && $entrega['id_entregador'] == $id_log)
+                    @if($entrega['entrega_status'] == 'Entregue' && $entrega['id_entregador'] == $id_log)
                     <tr>
                         <td>{{ $entrega['id_entrega'] }}</td>
                         <td>{{ $entrega['id_cliente'] }}</td>
                         <td>{{ $entrega['entrega_status'] }}</td>
-                        <td>{{ $entrega['cidade'] }}</td>   
+                        <td>{{ $entrega['cidade'] }}</td>
                         <td>{{ $entrega['created_at'] }}</td> 
-                        <td>R$ {{ $entrega['preco'] }},00</td>    
+                        <td>R$ {{ $entrega['preco'] }},00</td>      
                         
                         <td>
-                            <form class="formulario" action="{{ route('finalizar', ['id' => $entrega['id_entrega']]) }}" method="get"> 
-                                <button type="submit" class="btn btn-danger btn-sm" style="margin-bottom:10px; width: 75px;">Finalizar</button>
-                            </form>
                             <form class="formulario" action="{{ route('details', ['id' => $entrega['id_entrega']]) }}" method="get"> 
                                 <button type="submit" class="btn btn-dark btn-sm" style="margin-bottom:10px; width: 75px;">Detalhes</button>
                             </form>

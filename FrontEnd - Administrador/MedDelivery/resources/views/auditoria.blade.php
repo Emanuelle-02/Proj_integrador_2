@@ -5,7 +5,7 @@
 <div class="container-fluid px-4">
     <div class="card mt-4">
         <div class="card-header">
-            <h4>Auditoria - Status das entregas</h4>
+            <h4>Status das entregas</h4>
         </div>
         <div class="card-body" style="overflow-x:auto;">
             <table class="table table-bordered">
