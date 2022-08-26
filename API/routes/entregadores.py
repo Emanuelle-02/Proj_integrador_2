@@ -1,28 +1,35 @@
 from flask import Blueprint
 from controllers import entregadoresController
+from auth import token_required
 
 app=Blueprint('entregadores', __name__)
 
 @app.route('/entregadores', methods=["GET"])
-def get_entregadores():
-  return entregadoresController.get_todos_entregadores()
+@token_required
+def get_entregadores(current_user):
+  return entregadoresController.get_todos_entregadores(current_user)
 
 @app.route("/entregadores/<int:id>", methods=["GET"])
-def get_entregador_by_id(id):
-  return entregadoresController.get_by_id(id)
+@token_required
+def get_entregador_by_id(current_user,id):
+  return entregadoresController.get_by_id(current_user,id)
 
 @app.route("/entregadores/email/<email>" , methods=["GET"])
-def get_entregador_by_email(email):
-  return entregadoresController.get_by_email(email)
+@token_required
+def get_entregador_by_email(current_user,email):
+  return entregadoresController.get_by_email(current_user,email)
 
 @app.route("/entregadores", methods=["POST"])
-def add_entregadores():
-  return entregadoresController.insert()
+@token_required
+def add_entregadores(current_user):
+  return entregadoresController.insert(current_user)
 
 @app.route("/entregadores/<int:id>", methods=["PUT"])
-def update_entregador(id):
-  return entregadoresController.update(id)
+@token_required
+def update_entregador(current_user,id):
+  return entregadoresController.update(current_user,id)
 
 @app.route("/entregadores/<int:id>", methods=["DELETE"])
-def delete_entregador(id):
-  return entregadoresController.delete(id)
+@token_required
+def delete_entregador(current_user,id):
+  return entregadoresController.delete(current_user,id)

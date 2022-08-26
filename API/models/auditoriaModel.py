@@ -2,6 +2,6 @@ from config import db
 from .entities import Auditoria
 from flask import jsonify, request
 
-def get_tab_auditoria():
+def get_tab_auditoria(current_user):
     auditoria = Auditoria.query.all()
     return jsonify([audit.to_json() for audit in auditoria]), 200

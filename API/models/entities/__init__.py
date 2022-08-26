@@ -1,7 +1,7 @@
 from .Farmacias import Farmacias
 from .Entregadores import Entregadores
 from .Entregas import Entregas
-from .Auditoria import Auditoria
+from .Auditoria  import Auditoria
 from config import db
 
 __all__ = [

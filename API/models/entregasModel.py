@@ -4,23 +4,23 @@ from flask import jsonify, request
 from pycep_correios import get_address_from_cep, WebService, exceptions
 import re
 
-def get_todas_entregas():
+def get_todas_entregas(current_user):
   entregas = Entregas.query.all()
   return jsonify([entrega.to_json() for entrega in entregas]), 200
 
-def get_by_id(id):
+def get_by_id(current_user,id):
   entregas = Entregas.query.get(id)
   if entregas is None:
     return "Not found", 404
   return jsonify(entregas.to_json())
 
-def get_entregas_farma(id_entrega, id_cliente):
+def get_entregas_farma(current_user,id_entrega, id_cliente):
   entregas = Entregas.query.filter_by(id_entrega = id_entrega, id_cliente = id_cliente).first()
   if entregas is None:
     return {"error": "Not found"}, 404
   return jsonify(entregas.to_json())
 
-def insert():
+def insert(current_user):
   if request.is_json:
     body = request.get_json()
     entregas = Entregas (
@@ -60,7 +60,7 @@ def insert():
     return jsonify(entregas.to_json()), 201
   return {"error": "Request must be JSON"}, 415
 
-def update(id):
+def update(current_user,id):
   if request.is_json:
     body = request.get_json()
     entrega = Entregas.query.get(id)
@@ -91,7 +91,7 @@ def update(id):
     return "atualizado com sucesso", 200
   return {"error": "Request must be JSON"}, 415
 
-def delete(id):
+def delete(current_user,id):
   entrega = Entregas.query.get(id)
   if entrega is None:
       return "Not found", 404

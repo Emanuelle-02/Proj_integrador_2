@@ -1,19 +1,19 @@
 from models import entregadoresModel
 
-def get_todos_entregadores():
-  return entregadoresModel.get_todos_entregadores()
+def get_todos_entregadores(current_user):
+  return entregadoresModel.get_todos_entregadores(current_user)
 
-def get_by_id(id):
-  return entregadoresModel.get_by_id(id)
+def get_by_id(current_user,id):
+  return entregadoresModel.get_by_id(current_user,id)
 
-def get_by_email(email):
-  return entregadoresModel.get_by_email(email)
+def get_by_email(current_user,email):
+  return entregadoresModel.get_by_email(current_user,email)
 
-def insert():
-  return entregadoresModel.insert()
+def insert(current_user):
+  return entregadoresModel.insert(current_user)
 
-def update(id):
-  return entregadoresModel.update(id)
+def update(current_user,id):
+  return entregadoresModel.update(current_user,id)
 
-def delete(id): 
-  return entregadoresModel.delete(id)
+def delete(current_user,id): 
+  return entregadoresModel.delete(current_user,id)

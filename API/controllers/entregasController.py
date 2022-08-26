@@ -1,19 +1,19 @@
 from models import entregasModel
 
-def get_todas_entregas():
-  return entregasModel.get_todas_entregas()
+def get_todas_entregas(current_user):
+  return entregasModel.get_todas_entregas(current_user)
 
-def get_by_id(id):
-  return entregasModel.get_by_id(id)
+def get_by_id(current_user,id):
+  return entregasModel.get_by_id(current_user,id)
 
-def get_entregas_farma(id_entrega, id_cliente):
-  return entregasModel.get_entregas_farma(id_entrega, id_cliente)
+def get_entregas_farma(current_user, id_entrega, id_cliente):
+  return entregasModel.get_entregas_farma(current_user, id_entrega, id_cliente)
 
-def insert():
-  return entregasModel.insert()
+def insert(current_user):
+  return entregasModel.insert(current_user)
 
-def update(id):
-  return entregasModel.update(id)
+def update(current_user,id):
+  return entregasModel.update(current_user,id)
 
-def delete(id): 
-  return entregasModel.delete(id)
+def delete(current_user,id): 
+  return entregasModel.delete(current_user,id)

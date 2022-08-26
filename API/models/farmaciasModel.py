@@ -1,24 +1,27 @@
+import jwt
+import datetime
 from config import db
 from .entities import Farmacias
 from flask import jsonify, request
+from config import app
 
-def get_todas_farmacias():
+def get_todas_farmacias(current_user):
   farmacias = Farmacias.query.all()
   return jsonify([farms.to_json() for farms in farmacias]), 200
 
-def get_by_id(id):
+def get_by_id(current_user, id):
   farmacias = Farmacias.query.get(id)
   if farmacias is None:
     return "Error. Not found", 404
   return jsonify(farmacias.to_json())
 
-def get_by_email(email):
+def get_by_email(current_user, email):
   farmacias = Farmacias.query.filter_by(email=email).first()
   if farmacias is None:
     return "Error. Not found", 404
   return jsonify(farmacias.to_json())
 
-def insert():
+def insert(current_user):
   if request.is_json:
     body = request.get_json()
     farmacias = Farmacias (
@@ -34,10 +37,15 @@ def insert():
     )
     db.session.add(farmacias)
     db.session.commit()
-    return jsonify(farmacias.to_json()), 201
+    payload = {
+      "email": farmacias.email,
+      "exp": datetime.datetime.utcnow()
+    }
+    token = jwt.encode(payload,app.config["SECRET_KEY"])
+    return jsonify(farmacias.to_json(),token), 201
   return {"error": "Request must be JSON"}, 415
 
-def update(id):
+def update(current_user,id):
   if request.is_json:
     body = request.get_json()
     farms = Farmacias.query.get(id)
@@ -68,7 +76,7 @@ def update(id):
     return "atualizado com sucesso", 200
   return {"error": "Request must be JSON"}, 415
 
-def delete(id):
+def delete(current_user,id):
   farmacias = Farmacias.query.get(id)
   if farmacias is None:
       return "Error. Not found", 404

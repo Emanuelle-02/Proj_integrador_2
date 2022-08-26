@@ -17,4 +17,3 @@ class Auditoria(db.Model):
             "user_action": self.user_action,
             "created_at": self.created_at
         }
-
