@@ -65,7 +65,7 @@ class flaskApiController extends Controller
         $id_log = intval(getCookie_log()); 
         $response = Http::withHeaders($header)->post('http://127.0.0.1:8090/entregas',[
         'id_cliente' => $id_log, //Passa o id do usuário logado exemplificado caso a empresa disponibilize o frontend para o cliente como um serviço extra. 
-        //Sendo backend próprio, a farmácia em questão passa o próprio id como exemplificado abaixo:
+        //Sendo backend próprio, a farmácia em questão passa o próprio id como exemplificado abaixo(consequentemente, a linha 65 não precisaria existir):
         //'id_cliente' => 1,
         'medicamento' => $request->input('medicamento'),
         'nome' => $request->input('nome'),

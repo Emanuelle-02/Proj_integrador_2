@@ -16,7 +16,7 @@
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePage" aria-expanded="false" aria-controls="collapsePage" style = "color: white">
                                 <div class="sb-nav-link-icon" style = "color: red"><i class="fas fa-table"></i></div>
-                                Entregas
+                                Minhas entregas
                                 <div class="sb-sidenav-collapse-arrow" style = "color: white"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePage" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">

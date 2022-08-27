@@ -15,7 +15,6 @@
                         <th>Status</th>
                         <th>Cidade</th>
                         <th>Data</th>
-                        <th>Ações</th>
                     </tr>
                 </thead>
             
