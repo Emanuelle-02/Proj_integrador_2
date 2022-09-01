@@ -62,11 +62,11 @@ class flaskApiController extends Controller
             'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTY2MTQzODc3M30.0PB047n_S3IS_qFpUdBl1FMWbzDwmEbr7XSNqNzQWA0'
         ]; 
         //Pega o Id do usuário logado.
-        $id_log = intval(getCookie_log()); 
+        //$id_log = intval(getCookie_log()); 
         $response = Http::withHeaders($header)->post('http://127.0.0.1:8090/entregas',[
-        'id_cliente' => $id_log, //Passa o id do usuário logado exemplificado caso a empresa disponibilize o frontend para o cliente como um serviço extra. 
+        //'id_cliente' => $id_log, //Passa o id do usuário logado exemplificado caso a empresa disponibilize o frontend para o cliente como um serviço extra. 
         //Sendo backend próprio, a farmácia em questão passa o próprio id como exemplificado abaixo(consequentemente, a linha 65 não precisaria existir):
-        //'id_cliente' => 1,
+        'id_cliente' => 1,
         'medicamento' => $request->input('medicamento'),
         'nome' => $request->input('nome'),
         'rua' => $request->input('rua'),
@@ -130,5 +130,19 @@ class flaskApiController extends Controller
         $response = Http::withHeaders($header)->get('http://127.0.0.1:8090/entregas');
         $response2 = $response->json();
         return view('entregues', compact('response2','id_log'));
+    }
+
+    public function gerar_relatorio(){
+        $header = [
+            'x-access-token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsImV4cCI6MTY2MTQzODc3M30.0PB047n_S3IS_qFpUdBl1FMWbzDwmEbr7XSNqNzQWA0'
+        ];
+        
+        $response = Http::withHeaders($header)->get('http://127.0.0.1:8090/entregas/relatorio/'. 1);
+        $responseArray = $response->json();
+
+        $response2 = Http::withHeaders($header)->get('http://127.0.0.1:8090/entregas/relatorio');
+        $responseArray2 = $response2->json();
+
+        return view('relatorio', compact('responseArray', 'responseArray2'));
     }
 }
