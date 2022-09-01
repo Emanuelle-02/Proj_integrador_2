@@ -40,6 +40,10 @@ Route::get('/entregues', function () {
     return view('entregues');
 });
 
+Route::get('/relatorio', function () {
+    return view('relatorio');
+});
+
 Route::get('/fazerLogin', [flaskApiController::class, 'fazerLogin']);
 Route::get('/home', [flaskApiController::class, 'listaEntregas']);
 Route::get('/detalhesentrega/{id}', [flaskAPIController::class, 'detalhesentrega'])->name('details');
@@ -49,3 +53,4 @@ Route::get('/editar2/{id}', [flaskAPIController::class, 'editar2'])->name('edita
 Route::get('/removeentrega/{id}', [flaskAPIController::class, 'removeentrega'])->name('delete_entrega');
 Route::get('/andamento', [flaskApiController::class, 'listaAndamentos']);
 Route::get('/entregues', [flaskApiController::class, 'listaEntregues']);
+Route::get('relatorio', [flaskApiController::class, 'gerar_relatorio']);

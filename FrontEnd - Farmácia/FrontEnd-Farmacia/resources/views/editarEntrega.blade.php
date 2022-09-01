@@ -76,10 +76,15 @@
                                 </nav>
                             </div>
 
-                        <a class="nav-link" style="color: white;" href="/">
-                            <div class="sb-nav-link-icon" style="color: red;"><i class="fa-solid fa-right-from-bracket"></i> </div>
-                            Sair
-                        </a>
+                            <a class="nav-link" style="color: white;" href="/relatorio">
+                                <div class="sb-nav-link-icon" style="color: red;"><i class="fas fa-table"></i> </div>
+                                Gerar relatório
+                            </a>
+
+                            <a class="nav-link" style="color: white;" href="/">
+                                <div class="sb-nav-link-icon" style="color: red;"><i class="fa-solid fa-right-from-bracket"></i> </div>
+                                Sair
+                            </a>
                     </div>
                 </div>
             
