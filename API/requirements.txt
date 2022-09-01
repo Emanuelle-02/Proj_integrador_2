@@ -2,4 +2,6 @@ flask,
 flask_sqlalchemy,
 flask_cors,
 psycopg2,
+python-dotenv,
+pycep-correios,
 pyJWT
