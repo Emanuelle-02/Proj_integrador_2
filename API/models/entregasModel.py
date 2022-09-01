@@ -3,6 +3,8 @@ from .entities import Entregas
 from flask import jsonify, request
 from pycep_correios import get_address_from_cep, WebService, exceptions
 import re
+from datetime import date
+from sqlalchemy import func
 
 def get_todas_entregas(current_user):
   entregas = Entregas.query.all()
@@ -100,6 +102,11 @@ def delete(current_user,id):
   db.session.commit()
   return "deletado com sucesso", 200
 
+def get_client_by_id(current_user,id_cliente):
+  entrega = Entregas.query.filter_by(id_cliente=id_cliente).all()
+  if entrega is None:
+    return "Not found", 404
+  return jsonify([entregas.to_json() for entregas in entrega]), 200
 
 # Tratamento e API CEP 
 def tratarCep(cep):
@@ -153,3 +160,21 @@ def calculaEntrega(destino):
         valorEntrega = 30      
 
     return valorEntrega
+
+def get_relatorio(id):
+  EntregasAno = Entregas.query.filter(Entregas.id_cliente == id, Entregas.active == 'True',Entregas.created_at > date(2022, 8, 10)).count()
+  entregasEfetuadas = Entregas.query.filter_by(entrega_status = 'Entregue', id_cliente = id).count()
+  EntregasCanceladas = Entregas.query.filter(Entregas.id_cliente == id, Entregas.active == 'False',Entregas.created_at > date(2022, 8, 10)).count()
+  EntregasEmAndamento = Entregas.query.filter_by(entrega_status = 'Em andamento', id_cliente = 1).count()
+  valorEntregas = Entregas.query.with_entities(func.sum(Entregas.preco).label('total')).filter(Entregas.id_cliente == 1, Entregas.active == 'True').first().total  #(Entregas.id_cliente == 1,Entregas.active == 'True',Entregas.preco).sum()
+  relatorio = {
+    "totalEntregas": EntregasAno,
+    "entregasRealizadas": entregasEfetuadas,
+    "totalCancel": EntregasCanceladas,
+    "totalAndamento": EntregasEmAndamento,
+    "totalFrete": valorEntregas
+  }
+  
+  print(relatorio)
+  return jsonify(relatorio)
+  

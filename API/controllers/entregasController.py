@@ -17,3 +17,9 @@ def update(current_user,id):
 
 def delete(current_user,id): 
   return entregasModel.delete(current_user,id)
+
+def get_client_by_id(current_user,id_cliente): 
+  return entregasModel.get_client_by_id(current_user,id_cliente)
+
+def get_relatorio(id_cliente):
+  return entregasModel.get_relatorio(id_cliente)
